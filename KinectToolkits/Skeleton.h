@@ -59,9 +59,11 @@ private:
 	void setHandTipRight();
 	void setThumbRight();
 	void initialization(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
+	bool initialization(IBody *body);
 
 public:
 	Skeleton();
+	Skeleton(IBody * body);
 	Skeleton(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
 	~Skeleton();
 

@@ -45,7 +45,7 @@ HRESULT KinectInstance::openSensor()
 	return this->mKinectSensor->Open();
 }
 
-HRESULT KinectInstance::openReader(vector <int> mFrameSourceTypes)
+HRESULT KinectInstance::openReader(vector <DWORD> mFrameSourceTypes)
 {
 	this->mMultiSourceFrameReader = new MultiSourceFrameReader(this->mKinectSensor, mFrameSourceTypes);
 	if (this->mMultiSourceFrameReader->getHealth)
@@ -65,7 +65,36 @@ int KinectInstance::getState()
 	return this->state;
 }
 
-KinectInstance::KinectInstance(vector <int> mFrameSourceTypes)
+bool KinectInstance::acquireLatestFrames()
+{
+	this->mMultiSourceFrameReader->acquireLatestFrames();
+}
+
+void KinectInstance::update()
+{
+}
+
+Mat KinectInstance::getDepthFrame()
+{
+	return this->mMultiSourceFrameReader->getDepthFrame();
+}
+
+Mat KinectInstance::getColorFrame()
+{
+	return this->mMultiSourceFrameReader->getColorFrame();
+}
+
+Mat KinectInstance::getBodyIndexFrame()
+{
+	return this->mMultiSourceFrameReader->getBodyIndexFrame();
+}
+
+Mat KinectInstance::getSkeletonFrame()
+{
+	return this->mMultiSourceFrameReader->getSkeletonFrame();
+}
+
+KinectInstance::KinectInstance(vector <DWORD> mFrameSourceTypes)
 {
 	if (this->initializing() == KINECT_STATE_READY) 
 		if (SUCCEEDED(this->openReader(mFrameSourceTypes))) {

@@ -22,12 +22,23 @@ private:
 	void setStatePending();
 	HRESULT setCoordinateMapper();
 	HRESULT openSensor();
-	HRESULT openReader(vector <int> mFrameSourceTypes);
+	HRESULT openReader(vector <DWORD> mFrameSourceTypes);
 	HRESULT openReader(int mFrameSourceType);
 	
 public:
-	KinectInstance(vector <int> mFrameSourceTypes);
+	KinectInstance(vector <DWORD> mFrameSourceTypes);
 	~KinectInstance();
 	int getState();
+
+
+	bool acquireLatestFrames();
+	void update();
+	Mat getDepthFrame();
+	Mat getColorFrame();
+	Mat getBodyIndexFrame();
+	Mat getSkeletonFrame();
+
+
+
 };
 

@@ -1,5 +1,9 @@
 #pragma once
 #include "FramePainter.h"
+#define HEALTHY true
+#define UNHEALTHY false
+#define CHANNEL 4
+
 class BodyIndexFramePainter :
 	public FramePainter
 {
@@ -10,18 +14,37 @@ private:
 	int mFrameHeight;
 	int mFrameWidth;
 
-	BYTE * mFrameBuffer = nullptr;
-	UINT mFrameBufferSize = 0;
-
-	RGBQUAD * mFrameRGBXMat = nullptr;
-
 	Mat mFrameMat;
+	BYTE *mFrameArray = NULL;
+	UINT mFrameArraySize = 0;
+	RGBQUAD * mFrameArrayRGBX = nullptr;
+	UINT mFrameArrayRGBXSize = 0;
+
+	bool health = UNHEALTHY;
+
+	void setHealth(bool health);
+	HRESULT copyFrameDataToArray();
+	void copyFrameDataToMat();
+
+	
 
 public:
-	BodyIndexFramePainter();
+	BodyIndexFramePainter(IMultiSourceFrame *mMultiSourceFrame);
 	~BodyIndexFramePainter();
 	HRESULT update(IMultiSourceFrame *mMultiSourceFrame);
+	HRESULT initializing(IMultiSourceFrame * mMultiSourceFrame);
+
+
 	Mat getFrame();
-	void setFrame();
+	UINT16 * getFrameArray();
+	UINT getFrameArraySize();
+	RGBQUAD * getFrameArrayRGBX();
+	UINT getFrameArrayRGBXSize();
+
+
+
+	bool getHealth();
+	bool isHealthy();
+
 };
 

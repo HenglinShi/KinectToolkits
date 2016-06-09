@@ -1,11 +1,17 @@
 #pragma once
 #include "FramePainter.h"
+#define HEALTHY true
+#define UNHEALTHY false
 class BodyFramePainter :
 	public FramePainter
 {
+
 private:
 	IBodyFrame * mFrame = nullptr;
 	IBodyFrameReference * mFrameReference = nullptr;
+	IFrameDescription *mFrameDescription = nullptr;
+
+	bool health = UNHEALTHY;
 
 	BOOLEAN isTracked = false;
 
@@ -13,10 +19,12 @@ private:
 	int mFrameWidth;
 
 	IBody* bodies[BODY_COUNT] = { 0 };
-	IBody* body;
+	//x§IBody* body;
 
 	Skeleton * skeletons[BODY_COUNT] = { 0 };
 	Skeleton * skeleton;
+
+	void setHealth(bool health);
 
 public:
 	BodyFramePainter();
@@ -24,7 +32,13 @@ public:
 	BodyFramePainter(IBodyFrameReader * mBodyFrameReader);
 	Mat getFrame();
 	HRESULT update(IMultiSourceFrame * multiSourceFrame);
-	void setFrame();
+	HRESULT setFrame();
 	~BodyFramePainter();
+
+	HRESULT initializing(IMultiSourceFrame * mMultiSourceFrame);
+
+	bool getHealth();
+	bool isHealthy();
+
 };
 
