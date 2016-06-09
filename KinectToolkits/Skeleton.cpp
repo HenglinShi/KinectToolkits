@@ -2,6 +2,10 @@
 #include "Skeleton.h"
 
 
+Skeleton::Skeleton()
+{
+}
+
 Skeleton::Skeleton(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count])
 {
 	this->initialization(mjoints, mJointOrientations);

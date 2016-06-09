@@ -58,6 +58,20 @@ Mat ColorFramePainter::getFrame()
 	return this->mFrameMat;
 }
 
+HRESULT ColorFramePainter::update(IMultiSourceFrame *multiSourceFrame)
+{
+	if (this->mFrameReference) this->mFrameReference->Release();
+	if (this->mFrame) this->mFrame->Release();
+
+	if (SUCCEEDED(multiSourceFrame->get_ColorFrameReference(&(this->mFrameReference)))) {
+		if (SUCCEEDED(this->mFrameReference->AcquireFrame(&(this->mFrame)))) {
+			this->setFrame();
+			return S_OK;
+		}
+	}
+	return E_FAIL;
+}
+
 ColorFramePainter::~ColorFramePainter()
 {
 }

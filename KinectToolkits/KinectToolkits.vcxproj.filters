@@ -57,6 +57,12 @@
     <ClInclude Include="FrameReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MultiSourceFrameReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyIndexFramePainter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -93,6 +99,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FrameReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiSourceFrameReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyIndexFramePainter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

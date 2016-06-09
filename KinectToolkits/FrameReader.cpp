@@ -10,7 +10,7 @@ FrameReader::FrameReader()
 FrameReader::FrameReader(KinectInstance * mKinect, vector <int> mFrameSourceTypes)
 {
 	if (mFrameSourceTypes.size() == 1) {
-		this->mKinect->
+
 	}
 	
 	else {

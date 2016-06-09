@@ -150,11 +150,13 @@
   <ItemGroup>
     <ClInclude Include="Body.h" />
     <ClInclude Include="BodyFramePainter.h" />
+    <ClInclude Include="BodyIndexFramePainter.h" />
     <ClInclude Include="ColorFramePainter.h" />
     <ClInclude Include="DepthFramePainter.h" />
     <ClInclude Include="FramePainter.h" />
     <ClInclude Include="FrameReader.h" />
     <ClInclude Include="KinectInstance.h" />
+    <ClInclude Include="MultiSourceFrameReader.h" />
     <ClInclude Include="SkeletalJoint.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -163,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="BodyFramePainter.cpp" />
+    <ClCompile Include="BodyIndexFramePainter.cpp" />
     <ClCompile Include="ColorFramePainter.cpp" />
     <ClCompile Include="DepthFramePainter.cpp" />
     <ClCompile Include="FramePainter.cpp" />
@@ -170,6 +173,7 @@
     <ClCompile Include="KinectInstance.cpp" />
     <ClCompile Include="KinectToolkits.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MultiSourceFrameReader.cpp" />
     <ClCompile Include="SkeletalJoint.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="stdafx.cpp">

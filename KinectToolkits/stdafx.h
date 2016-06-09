@@ -26,6 +26,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
+#include "ColorFramePainter.h"
+#include "DepthFramePainter.h"
+#include "FramePainter.h"
+#include "BodyFramePainter.h"
 
 // TODO: reference additional headers your program requires here

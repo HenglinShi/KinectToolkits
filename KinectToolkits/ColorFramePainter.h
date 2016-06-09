@@ -28,6 +28,7 @@ public:
 	ColorFramePainter(IMultiSourceFrame * mMultiSourceFrame, Size resizingSize);
 	ColorFramePainter(IColorFrame * mColorFrame);
 	Mat getFrame();
+	HRESULT update(IMultiSourceFrame *multiSourceFrame);
 	~ColorFramePainter();
 };
 

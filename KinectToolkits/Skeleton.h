@@ -61,6 +61,7 @@ private:
 	void initialization(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
 
 public:
+	Skeleton();
 	Skeleton(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
 	~Skeleton();
 

@@ -45,14 +45,36 @@ HRESULT KinectInstance::openSensor()
 	return this->mKinectSensor->Open();
 }
 
+HRESULT KinectInstance::openReader(vector <int> mFrameSourceTypes)
+{
+	this->mMultiSourceFrameReader = new MultiSourceFrameReader(this->mKinectSensor, mFrameSourceTypes);
+	if (this->mMultiSourceFrameReader->getHealth)
+		return S_OK;
+
+	return E_FAIL;
+}
+
+HRESULT KinectInstance::openReader(int mFrameSourceType)
+{
+
+	return E_NOTIMPL;
+}
+
 int KinectInstance::getState()
 {
 	return this->state;
 }
 
-KinectInstance::KinectInstance()
+KinectInstance::KinectInstance(vector <int> mFrameSourceTypes)
 {
-	this->initializing();
+	if (this->initializing() == KINECT_STATE_READY) 
+		if (SUCCEEDED(this->openReader(mFrameSourceTypes))) {
+
+		}
+
+		else {
+			this->setStatePending();
+		}
 }
 
 
