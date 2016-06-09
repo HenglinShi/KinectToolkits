@@ -56,6 +56,12 @@ void SkeletalJoint::setJoint(Joint mJoint)
 	this->mJoint = mJoint;
 }
 
+void SkeletalJoint::setJoint(Joint mJoint, JointOrientation mJointOrientation)
+{
+	this->mJoint = mJoint;
+	this->mJointOrientation = mJointOrientation;
+}
+
 void SkeletalJoint::setJoint(float x, float y, float z)
 {
 	this->mJoint.Position.X = x;
@@ -70,6 +76,12 @@ SkeletalJoint::SkeletalJoint()
 SkeletalJoint::SkeletalJoint(Joint mJoint, JointOrientation mJointOrientation) {
 	this->mJoint = mJoint;
 	this->mJointOrientation = mJointOrientation;
+}
+
+HRESULT SkeletalJoint::update(Joint mJoint, JointOrientation mJointOrientation)
+{
+	this->setJoint(mJoint, mJointOrientation);
+	return S_OK;
 }
 
 

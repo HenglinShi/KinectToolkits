@@ -1,8 +1,10 @@
 #pragma once
-#include "FrameReader.h"
-#include "KinectInstance.h"
 #include "stdafx.h"
 #include "BodyIndexFramePainter.h"
+#include "BodyFramePainter.h"
+#include "ColorFramePainter.h"
+#include "DepthFramePainter.h"
+#include "FrameReader.h"
 class MultiSourceFrameReader :
 	public FrameReader
 {

@@ -1,13 +1,10 @@
 #pragma once
 #include "stdafx.h"
-#include <vector>
 #include "MultiSourceFrameReader.h"
-#define KINECT_STATE_READY 1
-#define KINECT_STATE_PENDING 0
-using namespace std;
+using namespace cv;
 class KinectInstance
 {
-	MultiSourceFrameReader *mMultiSourceFrameReader = nullptr;
+	MultiSourceFrameReader * mMultiSourceFrameReader = nullptr;
 	IKinectSensor * mKinectSensor = nullptr;
 	ICoordinateMapper * mCoordinateMapper = nullptr;
 	int state = 0;
@@ -27,18 +24,16 @@ private:
 	
 public:
 	KinectInstance(vector <DWORD> mFrameSourceTypes);
-	~KinectInstance();
+	
 	int getState();
 
 
-	bool acquireLatestFrames();
+	HRESULT acquireLatestFrames();
 	void update();
 	Mat getDepthFrame();
 	Mat getColorFrame();
 	Mat getBodyIndexFrame();
 	Mat getSkeletonFrame();
-
-
-
+	~KinectInstance();
 };
 

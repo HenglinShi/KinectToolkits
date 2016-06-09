@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 class SkeletalJoint
 {
 private:
@@ -20,12 +21,14 @@ private:
 	void setJointColorSpacePoint(float x, float y);
 
 	void setJoint(Joint mJoint);
+	void setJoint(Joint mJoint, JointOrientation mJointOrientation);
 	void setJoint(float x, float y, float z);
 
 
 public:
 	SkeletalJoint();
 	SkeletalJoint(Joint mJoint, JointOrientation mJointOrientation);
+	HRESULT update(Joint mJoint, JointOrientation mJointOrientation);
 	~SkeletalJoint();
 };
 

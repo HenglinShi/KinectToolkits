@@ -1,7 +1,6 @@
 #pragma once
-#include "FramePainter.h"
-#define HEALTHY true
-#define UNHEALTHY false
+#include "stdafx.h"
+
 
 class ColorFramePainter :
 	public FramePainter

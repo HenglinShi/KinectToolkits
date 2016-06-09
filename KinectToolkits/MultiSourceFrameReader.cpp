@@ -67,7 +67,7 @@ MultiSourceFrameReader::MultiSourceFrameReader(IKinectSensor *mKinectSensor, vec
 			cout << "Initializing depthFramePainter succeeded..." << endl << endl;
 			cout << "Initializing bodyIndexFramePainter..." << endl;
 
-			this->bodyIndexFramePainter = new BodyIndexFramePainter();
+			this->bodyIndexFramePainter = new BodyIndexFramePainter(this->multiSourceFrame);
 
 			while (!this->bodyIndexFramePainter->getHealth()) {
 				cout << "Initializing bodyIndexFramePainter failed..." << endl;
@@ -103,7 +103,7 @@ MultiSourceFrameReader::~MultiSourceFrameReader()
 HRESULT MultiSourceFrameReader::openReader(IKinectSensor *mKinectSensor, vector<DWORD> mFrameSourceTypes)
 {
 	DWORD sensoringMode = 0x00;
-	for (int i = 0; i < mFrameSourceTypes.size; i++)
+	for (UINT i = 0; i < mFrameSourceTypes.size(); i++)
 		sensoringMode = sensoringMode | mFrameSourceTypes[i];
 	if (SUCCEEDED(mKinectSensor->OpenMultiSourceFrameReader(sensoringMode, &(this->multiSourceFrameReader))))
 		return S_OK;
@@ -141,32 +141,32 @@ HRESULT MultiSourceFrameReader::acquireLatestFrames()
 
 Mat MultiSourceFrameReader::getDepthFrame()
 {
-	this->bodyFramePainter->getFrame();
+	return this->bodyFramePainter->getFrame();
 }
 
 Mat MultiSourceFrameReader::getColorFrame()
 {
-	this->colorFramePainter->getFrame();
+	return this->colorFramePainter->getFrame();
 }
 
 Mat MultiSourceFrameReader::getBodyFrame()
 {
-	this->bodyFramePainter->getFrame();
+	return this->bodyFramePainter->getFrame();
 }
 
 Mat MultiSourceFrameReader::getBodyIndexFrame()
 {
-	this->bodyIndexFramePainter->getFrame();
+	return this->bodyIndexFramePainter->getFrame();
 }
 
 Mat MultiSourceFrameReader::getSkeletonFrame()
 {
-	return this->bodyFramePainter->getFrame();
+	return  this->bodyFramePainter->getFrame();
 }
 
 
 bool MultiSourceFrameReader::getHealth()
 {
-	return isHealthy;
+	return this->isHealthy;
 }
 

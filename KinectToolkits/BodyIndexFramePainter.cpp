@@ -82,34 +82,29 @@ bool BodyIndexFramePainter::isHealthy()
 
 
 
-
-
-
-
-
 Mat BodyIndexFramePainter::getFrame()
 {
 	return this->mFrameMat;
 }
 
-UINT16 * BodyIndexFramePainter::getFrameArray()
+BYTE * BodyIndexFramePainter::getFrameArray()
 {
-	return nullptr;
+	return this->mFrameArray;
 }
 
 UINT BodyIndexFramePainter::getFrameArraySize()
 {
-	return 0;
+	return this->mFrameArraySize;
 }
 
 RGBQUAD * BodyIndexFramePainter::getFrameArrayRGBX()
 {
-	return nullptr;
+	return this->mFrameArrayRGBX;
 }
 
 UINT BodyIndexFramePainter::getFrameArrayRGBXSize()
 {
-	return 0;
+	return this->mFrameArrayRGBXSize;
 }
 
 
@@ -127,29 +122,15 @@ HRESULT BodyIndexFramePainter::copyFrameDataToArray()
 			mFrameArrayRGBXIterator++;
 			(this->mFrameArray)++;
 		}
-
-		this->mFrameMat = Mat(this->mFrameHeight, this->mFrameWidth, CV_8UC4, this->mFrameRGBXMat);
+		return S_OK;
+		
 	}
+	return E_FAIL;
 }
 
 void BodyIndexFramePainter::copyFrameDataToMat()
 {
+	if (SUCCEEDED(this->copyFrameDataToArray()))
+		this->mFrameMat = Mat(this->mFrameHeight, this->mFrameWidth, CV_8UC4, this->mFrameArrayRGBX);
 }
 
-void BodyIndexFramePainter::setFrame()
-{
-	if (SUCCEEDED(this->mFrame->AccessUnderlyingBuffer(&(this->mFrameBufferSize), &(this->mFrameBuffer)))) {
-		RGBQUAD * mFrameRGBXMatPointer = this->mFrameRGBXMat;
-
-		for (UINT i = 0; i < this->mFrameBufferSize; i++) {
-			mFrameRGBXMatPointer->rgbRed = (*(this->mFrameBuffer)) & 0x01 ? 0x00 : 0xFF;
-			mFrameRGBXMatPointer->rgbGreen = (*(this->mFrameBuffer)) & 0x02 ? 0x00 : 0xFF;
-			mFrameRGBXMatPointer->rgbBlue = (*(this->mFrameBuffer)) & 0x04 ? 0x00 : 0xFF;
-			mFrameRGBXMatPointer->rgbReserved = 0XFF;
-			mFrameRGBXMatPointer ++;
-			(this->mFrameBuffer) ++;
-		}
-
-		this->mFrameMat = Mat(this->mFrameHeight, this->mFrameWidth, CV_8UC4, this->mFrameRGBXMat);
-	}
-}

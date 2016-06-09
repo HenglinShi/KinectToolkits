@@ -108,44 +108,47 @@ Mat DepthFramePainter::getFrame()
 
 HRESULT DepthFramePainter::copyFrameDataToArray()
 {
-	if (SUCCEEDED())
-	this->mFrame->AccessUnderlyingBuffer(&(this->mFrameArraySize), &(this->mFrameArray));
+	if (SUCCEEDED(this->mFrame->AccessUnderlyingBuffer(&(this->mFrameArraySize), &(this->mFrameArray)))) {
+		RGBQUAD* mFrameArrayRGBXIterator = this->mFrameArrayRGBX;
 
-	RGBQUAD* mFrameArrayRGBXIterator = this->mFrameArrayRGBX;
+		const UINT16* mFrameArrayEnd = this->mFrameArray + this->mFrameHeight * this->mFrameWidth;
 
-	const UINT16* mFrameArrayEnd = this->mFrameArray + this->mFrameHeight * this->mFrameWidth;
+		while (this->mFrameArray < mFrameArrayEnd) {
 
-	while (this->mFrameArray < mFrameArrayEnd) {
+			USHORT depth = *(this->mFrameArray);
 
-		USHORT depth = *(this->mFrameArray);
-
-		if (depth < 0) {
-			mFrameArrayRGBXIterator->rgbRed = 0xFF;
-			mFrameArrayRGBXIterator->rgbGreen = 0;
-			mFrameArrayRGBXIterator->rgbBlue = 0;
-			mFrameArrayRGBXIterator->rgbReserved = 0xFF;
+			if (depth < 0) {
+				mFrameArrayRGBXIterator->rgbRed = 0xFF;
+				mFrameArrayRGBXIterator->rgbGreen = 0;
+				mFrameArrayRGBXIterator->rgbBlue = 0;
+				mFrameArrayRGBXIterator->rgbReserved = 0xFF;
+			}
+			else if (depth < depthFrameMinReliableDistance) {
+				mFrameArrayRGBXIterator->rgbRed = 0;
+				mFrameArrayRGBXIterator->rgbGreen = depth & 0x7F + 0x80;
+				mFrameArrayRGBXIterator->rgbBlue = 0;
+				mFrameArrayRGBXIterator->rgbReserved = 0xFF;
+			}
+			else if (depth < depthFrameMaxReliableDistance) {
+				mFrameArrayRGBXIterator->rgbRed = depth & 0xFF;
+				mFrameArrayRGBXIterator->rgbGreen = mFrameArrayRGBXIterator->rgbRed;
+				mFrameArrayRGBXIterator->rgbBlue = mFrameArrayRGBXIterator->rgbRed;
+				mFrameArrayRGBXIterator->rgbReserved = 0xFF;
+			}
+			else {
+				mFrameArrayRGBXIterator->rgbRed = 0;
+				mFrameArrayRGBXIterator->rgbGreen = 0;
+				mFrameArrayRGBXIterator->rgbBlue = depth & 0x7F + 0x80;
+				mFrameArrayRGBXIterator->rgbReserved = 0xFF;
+			}
+			++mFrameArrayRGBXIterator;
+			++ this->mFrameArray;
 		}
-		else if (depth < depthFrameMinReliableDistance) {
-			mFrameArrayRGBXIterator->rgbRed = 0;
-			mFrameArrayRGBXIterator->rgbGreen = depth & 0x7F + 0x80;
-			mFrameArrayRGBXIterator->rgbBlue = 0;
-			mFrameArrayRGBXIterator->rgbReserved = 0xFF;
-		}
-		else if (depth < depthFrameMaxReliableDistance) {
-			mFrameArrayRGBXIterator->rgbRed = depth & 0xFF;
-			mFrameArrayRGBXIterator->rgbGreen = mFrameArrayRGBXIterator->rgbRed;
-			mFrameArrayRGBXIterator->rgbBlue = mFrameArrayRGBXIterator->rgbRed;
-			mFrameArrayRGBXIterator->rgbReserved = 0xFF;
-		}
-		else {
-			mFrameArrayRGBXIterator->rgbRed = 0;
-			mFrameArrayRGBXIterator->rgbGreen = 0;
-			mFrameArrayRGBXIterator->rgbBlue = depth & 0x7F + 0x80;
-			mFrameArrayRGBXIterator->rgbReserved = 0xFF;
-		}
-		++mFrameArrayRGBXIterator;
-		++ this->mFrameArray;
+
+		return S_OK;
 	}
+	
+	return E_FAIL;
 }
 
 

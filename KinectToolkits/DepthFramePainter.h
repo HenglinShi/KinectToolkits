@@ -1,8 +1,7 @@
 #pragma once
-#include "FramePainter.h"
+#include "stdafx.h"
 #define HEALTHY true
 #define UNHEALTHY false
-#define CHANNEL 4
 class DepthFramePainter :
 	public FramePainter
 {

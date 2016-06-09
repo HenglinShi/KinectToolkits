@@ -26,9 +26,24 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+
+#include "KinectInstance.h"
+#include "MultiSourceFrameReader.h"
+#include "FramePainter.h"
 #include "ColorFramePainter.h"
 #include "DepthFramePainter.h"
-#include "FramePainter.h"
+#include "BodyIndexFramePainter.h"
 #include "BodyFramePainter.h"
 
+#include "Skeleton.h"
+#include "SkeletalJoint.h"
+#include "Body.h"
+
+
+#define KINECT_STATE_READY 1
+#define KINECT_STATE_PENDING 0
+#define HEALTHY true
+#define UNHEALTHY false
+#define CHANNEL 4
 // TODO: reference additional headers your program requires here
+using namespace std;

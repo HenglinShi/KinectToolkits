@@ -12,7 +12,7 @@ int main() {
 
 	KinectInstance * mKinect = new KinectInstance(frameSourceTypes);
 
-	if (mKinect->getState = KINECT_STATE_READY) {
+	if (mKinect->getState() == KINECT_STATE_READY) {
 
 		namedWindow("DEPTH", CV_WINDOW_AUTOSIZE);
 		namedWindow("COLOR", CV_WINDOW_AUTOSIZE);

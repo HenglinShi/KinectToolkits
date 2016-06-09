@@ -22,7 +22,7 @@ int KinectInstance::initializing()
 
 void KinectInstance::setState(int newKinectState)
 {
-	this->setState = newKinectState;
+	this->state = newKinectState;
 }
 
 void KinectInstance::setStateReady()
@@ -48,7 +48,7 @@ HRESULT KinectInstance::openSensor()
 HRESULT KinectInstance::openReader(vector <DWORD> mFrameSourceTypes)
 {
 	this->mMultiSourceFrameReader = new MultiSourceFrameReader(this->mKinectSensor, mFrameSourceTypes);
-	if (this->mMultiSourceFrameReader->getHealth)
+	if (this->mMultiSourceFrameReader->getHealth())
 		return S_OK;
 
 	return E_FAIL;
@@ -65,9 +65,11 @@ int KinectInstance::getState()
 	return this->state;
 }
 
-bool KinectInstance::acquireLatestFrames()
+HRESULT KinectInstance::acquireLatestFrames()
 {
-	this->mMultiSourceFrameReader->acquireLatestFrames();
+	if(SUCCEEDED(this->mMultiSourceFrameReader->acquireLatestFrames()))
+		return S_OK;
+	return E_FAIL;
 }
 
 void KinectInstance::update()

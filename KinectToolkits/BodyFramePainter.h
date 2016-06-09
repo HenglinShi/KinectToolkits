@@ -1,5 +1,6 @@
 #pragma once
-#include "FramePainter.h"
+#include "stdafx.h"
+#include "Skeleton.h"
 #define HEALTHY true
 #define UNHEALTHY false
 class BodyFramePainter :
@@ -19,7 +20,7 @@ private:
 	int mFrameWidth;
 
 	IBody* bodies[BODY_COUNT] = { 0 };
-	//x§IBody* body;
+	Mat mFrameMat;
 
 	Skeleton * skeletons[BODY_COUNT] = { 0 };
 	Skeleton * skeleton;
@@ -27,12 +28,12 @@ private:
 	void setHealth(bool health);
 
 public:
-	BodyFramePainter();
+
 	BodyFramePainter(IMultiSourceFrame * multiSourceFrame);
-	BodyFramePainter(IBodyFrameReader * mBodyFrameReader);
+
 	Mat getFrame();
 	HRESULT update(IMultiSourceFrame * multiSourceFrame);
-	HRESULT setFrame();
+
 	~BodyFramePainter();
 
 	HRESULT initializing(IMultiSourceFrame * mMultiSourceFrame);

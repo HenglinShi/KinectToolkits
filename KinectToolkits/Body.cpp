@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Body.h"
+
 
 
 Body::Body()
@@ -10,7 +10,7 @@ Body::Body()
 Body::Body(Joint mJoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count])
 {
 
-	this->mSkeleton = new Skeleton(mJoints, mJointOrientations);
+	//this->mSkeleton = new Skeleton(mJoints, mJointOrientations);
 
 }
 

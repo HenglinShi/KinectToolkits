@@ -1,9 +1,10 @@
 #pragma once
+#include "stdafx.h"
 #include "FramePainter.h"
+
 #define HEALTHY true
 #define UNHEALTHY false
-#define CHANNEL 4
-
+using namespace cv;
 class BodyIndexFramePainter :
 	public FramePainter
 {
@@ -36,7 +37,7 @@ public:
 
 
 	Mat getFrame();
-	UINT16 * getFrameArray();
+	BYTE * getFrameArray();
 	UINT getFrameArraySize();
 	RGBQUAD * getFrameArrayRGBX();
 	UINT getFrameArrayRGBXSize();
@@ -47,4 +48,3 @@ public:
 	bool isHealthy();
 
 };
-

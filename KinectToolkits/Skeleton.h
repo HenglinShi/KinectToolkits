@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "SkeletalJoint.h"
 class Skeleton
 {
@@ -34,40 +35,70 @@ private:
 	void setJoints(Joint mJoints[JointType_Count]);
 	void setJointOrientation(JointOrientation mJointOrientation[JointType_Count]);
 
-	void setSpineMid();
-	void setNeck();
-	void setHead();
-	void setShoulderLeft();
-	void setElbowLeft();
-	void setWristLeft();
-	void setHandLeft();
-	void setShoulderRight();
-	void setElbowRight();
-	void setWristRight();
-	void setHandRight();
-	void setHipLeft();
-	void setKneeLeft();
-	void setAnkleLeft();
-	void setFootLeft();
-	void setHipRight();
-	void setKneeRight();
-	void setAnkleRight();
-	void setFootRight();
-	void setSpineShoulder();
-	void setHandTipLeft();
-	void setThumbLeft();
-	void setHandTipRight();
-	void setThumbRight();
-	void initialization(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
-	bool initialization(IBody *body);
+	
+
+	void initializingSpineMid();
+	void initializingSpineBase();
+	void initializingNeck();
+	void initializingHead();
+	void initializingShoulderLeft();
+	void initializingElbowLeft();
+	void initializingWristLeft();
+	void initializingHandLeft();
+	void initializingShoulderRight();
+	void initializingElbowRight();
+	void initializingWristRight();
+	void initializingHandRight();
+	void initializingHipLeft();
+	void initializingKneeLeft();
+	void initializingAnkleLeft();
+	void initializingFootLeft();
+	void initializingHipRight();
+	void initializingKneeRight();
+	void initializingAnkleRight();
+	void initializingFootRight();
+	void initializingSpineShoulder();
+	void initializingHandTipLeft();
+	void initializingThumbLeft();
+	void initializingHandTipRight();
+	void initializingThumbRight();
+
+
+	void updateSkeletalJoints();
+
+	void updateSpineBase();
+	void updateSpineMid();
+	void updateNeck();
+	void updateHead();
+	void updateShoulderLeft();
+	void updateElbowLeft();
+	void updateWristLeft();
+	void updateHandLeft();
+	void updateShoulderRight();
+	void updateElbowRight();
+	void updateWristRight();
+	void updateHandRight();
+	void updateHipLeft();
+	void updateKneeLeft();
+	void updateAnkleLeft();
+	void updateFootLeft();
+	void updateHipRight();
+	void updateKneeRight();
+	void updateAnkleRight();
+	void updateFootRight();
+	void updateSpineShoulder();
+	void updateHandTipLeft();
+	void updateThumbLeft();
+	void updateHandTipRight();
+	void updateThumbRight();
+
+	HRESULT initializing();
 
 public:
 	Skeleton();
-	Skeleton(IBody * body);
-	Skeleton(Joint mjoints[JointType_Count], JointOrientation mJointOrientations[JointType_Count]);
 	~Skeleton();
 
-
+	HRESULT update(IBody * body);
 
 
 
