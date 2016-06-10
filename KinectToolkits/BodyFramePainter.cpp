@@ -8,11 +8,10 @@
 BodyFramePainter::BodyFramePainter(IMultiSourceFrame * multiSourceFrame)
 {
 	if (SUCCEEDED(this->initializing(multiSourceFrame))) {
-		this->skeleton = new Skeleton();
-		this->setHealth(HEALTHY);
+
 	}
 	else {
-		this->setHealth(UNHEALTHY);
+		
 	}
 }
 
@@ -73,10 +72,13 @@ HRESULT BodyFramePainter::update(IMultiSourceFrame * multiSourceFrame)
 HRESULT BodyFramePainter::initializing(IMultiSourceFrame * mMultiSourceFrame)
 {
 	if (SUCCEEDED(mMultiSourceFrame->get_BodyFrameReference(&(this->mFrameReference)))) {
-		if (SUCCEEDED(this->mFrameReference->AcquireFrame(&(this->mFrame)))) {			
+		if (SUCCEEDED(this->mFrameReference->AcquireFrame(&(this->mFrame)))) {	
+			this->skeleton = new Skeleton();
+			this->setHealth(HEALTHY);
 			return S_OK;
 		}
 	}
+	this->setHealth(UNHEALTHY);
 	return E_FAIL;
 }
 

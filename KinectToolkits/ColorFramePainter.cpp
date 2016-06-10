@@ -12,12 +12,11 @@ ColorFramePainter::ColorFramePainter()
 ColorFramePainter::ColorFramePainter(IMultiSourceFrame * mMultiSourceFrame)
 {
 	if (SUCCEEDED(this->initializing(mMultiSourceFrame))) {
-		this->mFrameMat = Mat::zeros(this->mFrameHeight, this->mFrameWidth, CV_8UC4);
-		this->setHealth(HEALTHY);
+
 	}
 
-	else
-		this->setHealth(UNHEALTHY);
+
+		
 }
 
 ColorFramePainter::ColorFramePainter(IMultiSourceFrame * mMultiSourceFrame, int resizingHeight, int resizingWidth)
@@ -95,8 +94,11 @@ HRESULT ColorFramePainter::initializing(IMultiSourceFrame * mMultiSourceFrame)
 					SUCCEEDED(this->mFrameDescription->get_Width(&(this->mFrameWidth)))) {
 
 					if (this->mFrameHeight * this->mFrameWidth != 0) {
-						this->mFrameArraySize = (this->mFrameHeight) * (this->mFrameWidth) * CHANNEL;
 
+						this->mFrameMat = Mat::zeros(this->mFrameHeight, this->mFrameWidth, CV_8UC4);
+						this->setHealth(HEALTHY);
+
+						this->mFrameArraySize = (this->mFrameHeight) * (this->mFrameWidth) * CHANNEL;
 						this->mFrameArray = new UINT8[this->mFrameArraySize];
 						return S_OK;
 					}
@@ -105,6 +107,7 @@ HRESULT ColorFramePainter::initializing(IMultiSourceFrame * mMultiSourceFrame)
 			}
 		}
 	}
+	this->setHealth(UNHEALTHY);
 	return E_FAIL;
 }
 

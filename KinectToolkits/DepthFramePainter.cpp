@@ -5,14 +5,9 @@ DepthFramePainter::DepthFramePainter(IMultiSourceFrame * mMultiSourceFrame)
 {
 	if (SUCCEEDED(this->initializing(mMultiSourceFrame))) {
 
-		this->mFrameMat = Mat::zeros(this->mFrameHeight, this->mFrameWidth, CV_8UC4);
-		this->mFrameArrayRGBXSize = mFrameHeight * mFrameWidth;
-		this->mFrameArrayRGBX = new RGBQUAD[this->mFrameArrayRGBXSize];
-
-		this->setHealth(HEALTHY);
+		
 	}
-	else 
-		this->setHealth(UNHEALTHY);
+		
 }
 
 
@@ -38,13 +33,17 @@ HRESULT DepthFramePainter::initializing(IMultiSourceFrame * mMultiSourceFrame)
 						if (SUCCEEDED(this->mFrame->get_DepthMaxReliableDistance(&(this->depthFrameMaxReliableDistance))) &&
 							SUCCEEDED(this->mFrame->get_DepthMinReliableDistance(&(this->depthFrameMinReliableDistance))))
 
+							this->mFrameMat = Mat::zeros(this->mFrameHeight, this->mFrameWidth, CV_8UC4);
+							this->mFrameArrayRGBXSize = mFrameHeight * mFrameWidth;
+							this->mFrameArrayRGBX = new RGBQUAD[this->mFrameArrayRGBXSize];
+							this->setHealth(HEALTHY);
 							return S_OK;
 					}
-
 				}
 			}
 		}
 	}
+	this->setHealth(UNHEALTHY);
 	return E_FAIL;
 }
 
