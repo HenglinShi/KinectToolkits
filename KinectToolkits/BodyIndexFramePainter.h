@@ -25,7 +25,7 @@ private:
 
 	void setHealth(bool health);
 	HRESULT copyFrameDataToArray();
-	void copyFrameDataToMat();
+	HRESULT copyFrameDataToMat();
 
 	
 

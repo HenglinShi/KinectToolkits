@@ -111,4 +111,10 @@ KinectInstance::KinectInstance(vector <DWORD> mFrameSourceTypes)
 
 KinectInstance::~KinectInstance()
 {
+	this->mCoordinateMapper->
+}
+
+Mat KinectInstance::getDepthFrameOnColorSpace()
+{
+	this->mMultiSourceFrameReader->getColorFrame()
 }

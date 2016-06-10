@@ -1,6 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "MultiSourceFrameReader.h"
+#define HEALTHY true
+#define UNHEALTHY false
+
 using namespace cv;
 class KinectInstance
 {
@@ -35,5 +38,9 @@ public:
 	Mat getBodyIndexFrame();
 	Mat getSkeletonFrame();
 	~KinectInstance();
+
+	Mat getDepthFrameOnColorSpace();
+	Mat getColorFrameOnDepthSpace();
+
 };
 

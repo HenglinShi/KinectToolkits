@@ -33,9 +33,22 @@ public:
 
 	HRESULT acquireLatestFrames();
 	Mat getDepthFrame();
+	UINT16 * getDepthFrameArray();
+	UINT getDepthFrameArraySize();
+	RGBQUAD * getDepthFrameArrayRGBX();
+	UINT getDepthFrameArrayRGBXSize();
+
 	Mat getColorFrame();
+	UINT8 * getColorFrameArray();
+	UINT getColorFrameArraySize();
+
 	Mat getBodyFrame();
+
 	Mat getBodyIndexFrame();
+	BYTE * getBodyIndexFrameArray();
+	UINT getBodyIndexFrameArraySize();
+	RGBQUAD * getBodyIndexFrameArrayRGBX();
+	UINT getBodyIndexFrameArrayRGBXSize();
 	Mat getSkeletonFrame();
 
 

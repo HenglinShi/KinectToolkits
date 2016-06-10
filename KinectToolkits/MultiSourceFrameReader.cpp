@@ -144,9 +144,39 @@ Mat MultiSourceFrameReader::getDepthFrame()
 	return this->bodyFramePainter->getFrame();
 }
 
+UINT16 * MultiSourceFrameReader::getDepthFrameArray()
+{
+	return this->depthFramePainter->getFrameArray();
+}
+
+UINT MultiSourceFrameReader::getDepthFrameArraySize()
+{
+	return this->depthFramePainter->getFrameArraySize();
+}
+
+RGBQUAD * MultiSourceFrameReader::getDepthFrameArrayRGBX()
+{
+	return this->depthFramePainter->getFrameArrayRGBX();
+}
+
+UINT MultiSourceFrameReader::getDepthFrameArrayRGBXSize()
+{
+	return 0;
+}
+
 Mat MultiSourceFrameReader::getColorFrame()
 {
 	return this->colorFramePainter->getFrame();
+}
+
+UINT8 * MultiSourceFrameReader::getColorFrameArray()
+{
+	return nullptr;
+}
+
+UINT MultiSourceFrameReader::getColorFrameArraySize()
+{
+	return 0;
 }
 
 Mat MultiSourceFrameReader::getBodyFrame()
@@ -157,6 +187,26 @@ Mat MultiSourceFrameReader::getBodyFrame()
 Mat MultiSourceFrameReader::getBodyIndexFrame()
 {
 	return this->bodyIndexFramePainter->getFrame();
+}
+
+BYTE * MultiSourceFrameReader::getBodyIndexFrameArray()
+{
+	return nullptr;
+}
+
+UINT MultiSourceFrameReader::getBodyIndexFrameArraySize()
+{
+	return 0;
+}
+
+RGBQUAD * MultiSourceFrameReader::getBodyIndexFrameArrayRGBX()
+{
+	return nullptr;
+}
+
+UINT MultiSourceFrameReader::getBodyIndexFrameArrayRGBXSize()
+{
+	return 0;
 }
 
 Mat MultiSourceFrameReader::getSkeletonFrame()

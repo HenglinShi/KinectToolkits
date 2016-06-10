@@ -2,8 +2,41 @@
 #include "KinectInstance.h"
 #include "FrameReader.h"
 
+
+/*Initializing Kinect Device*/
+
+HRESULT initializing()
+{
+	if (FAILED(GetDefaultKinectSensor(&kinectSensor))) {
+		return false;
+	}
+
+	if (kinectSensor) {
+		kinectSensor->get_CoordinateMapper(&multisourceCoordinateMapper);
+
+		kinectSensor->Open();
+		kinectSensor->OpenMultiSourceFrameReader(FrameSourceTypes::FrameSourceTypes_Depth |
+			FrameSourceTypes::FrameSourceTypes_Color |
+			FrameSourceTypes::FrameSourceTypes_Body |
+			FrameSourceTypes::FrameSourceTypes_BodyIndex,
+			&multiSourceFrameReader);
+		return multiSourceFrameReader;
+	}
+	else {
+		return false;
+	}
+}
+
+
+
+
 int main() {
 	
+	
+
+
+
+
 
 	vector <DWORD> frameSourceTypes { FrameSourceTypes::FrameSourceTypes_Depth, 
 									  FrameSourceTypes::FrameSourceTypes_Color, 
@@ -26,7 +59,7 @@ int main() {
 			imshow("DEPTH", mKinect->getDepthFrame());
 			imshow("COLOR", mKinect->getColorFrame());
 			imshow("BODY INDEX", mKinect->getBodyIndexFrame());
-			imshow("SKELETON", mKinect->getSkeletonFrame());
+			//imshow("SKELETON", mKinect->getSkeletonFrame());
 			waitKey(1);
 		}
 

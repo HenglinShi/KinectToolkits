@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Body" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAQEBAAAAAEAAAAAAgIIAAAAAAAA=</HashCode>
+      <FileName>Body.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BodyFramePainter" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAABhAAAEAAAAEAAAEIAAIAAAACKIAAAADMAAg=</HashCode>
+      <FileName>BodyFramePainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BodyIndexFramePainter" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABBlAACEBAAAFACAMIAAAggAACIAAEAACOAAg=</HashCode>
+      <FileName>BodyIndexFramePainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorFramePainter" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAABnCAAEAAAAFgjAMIAEAgAAACIABACACeAAg=</HashCode>
+      <FileName>ColorFramePainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DepthFramePainter" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABlAACEBAgAFACAMIAAIggAACIAAEAACOAAg=</HashCode>
+      <FileName>DepthFramePainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FramePainter" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAYAAgCQAAAAAAAAA=</HashCode>
+      <FileName>FramePainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrameReader" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>FrameReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KinectInstance" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQABCCAAIAAAEAAAAAAggAABAQIQAAEIAAAAAAEBCQ=</HashCode>
+      <FileName>KinectInstance.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiSourceFrameReader" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAACAAAAAEAgoIAAAQAgBAAIAQAAAAEgAg=</HashCode>
+      <FileName>MultiSourceFrameReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkeletalJoint" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAQAAQEAEAAAAABAAAAAoEAABAAUAAA=</HashCode>
+      <FileName>SkeletalJoint.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skeleton" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FckAMQCSsC0GmGJAwKEBBgQRAUGIGCcRgRIhgAAmmrE=</HashCode>
+      <FileName>Skeleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

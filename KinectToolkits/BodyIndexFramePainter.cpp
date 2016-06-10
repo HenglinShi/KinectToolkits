@@ -84,7 +84,9 @@ bool BodyIndexFramePainter::isHealthy()
 
 Mat BodyIndexFramePainter::getFrame()
 {
-	return this->mFrameMat;
+	if (SUCCEEDED(this->copyFrameDataToMat()))
+		return this->mFrameMat;
+	return Mat::zeros(this->mFrameHeight, this->mFrameWidth, CV_8UC4);
 }
 
 BYTE * BodyIndexFramePainter::getFrameArray()
@@ -128,9 +130,12 @@ HRESULT BodyIndexFramePainter::copyFrameDataToArray()
 	return E_FAIL;
 }
 
-void BodyIndexFramePainter::copyFrameDataToMat()
+HRESULT BodyIndexFramePainter::copyFrameDataToMat()
 {
-	if (SUCCEEDED(this->copyFrameDataToArray()))
+	if (SUCCEEDED(this->copyFrameDataToArray())) {
 		this->mFrameMat = Mat(this->mFrameHeight, this->mFrameWidth, CV_8UC4, this->mFrameArrayRGBX);
+		return S_OK;
+	}
+	return E_FAIL;
 }
 
