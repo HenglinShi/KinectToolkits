@@ -48,6 +48,12 @@ UINT16  * depthFrameArray = nullptr;
 
 Skeleton * skeleton = nullptr;
 
+
+Mat colorFrameMat;
+Mat depthFrameMat;
+Mat bodyIndexFrameMat;
+Mat bodyFrameMat;
+
 BodyFramePainter * mBodyFramePainter = nullptr;
 ColorFramePainter * mColorFramePainter = nullptr;
 DepthFramePainter * mDepthFramePainter = nullptr;
@@ -217,57 +223,91 @@ HRESULT update()
 {
 	if (multiSourceFrame) multiSourceFrame->Release();
 
-	if (SUCCEEDED(multiSourceFrameReader->AcquireLatestFrame(&multiSourceFrame))) {
+	if (FAILED(multiSourceFrameReader->AcquireLatestFrame(&multiSourceFrame))) {
+		cout << "update multisource frame failed" << endl;
+		return E_FAIL;
+	}
 
-		if (SUCCEEDED(updateBodyFrame) &&
-			SUCCEEDED(updateColorFrame) &&
-			SUCCEEDED(updateDepthFrame) &&
-			SUCCEEDED(updateBodyIndexFrame))
-
-			//SUCCEEDED(mColorFrame->AccessRawUnderlyingBuffer(&colorFrameArraySize, &colorFrameArray))
-
-			if (SUCCEEDED(mDepthFrame->AccessUnderlyingBuffer(&depthFrameArraySize, &depthFrameArray))) {
-
-				if (SUCCEEDED(multisourceCoordinateMapper->MapColorFrameToDepthSpace(
-									depthFrameArraySize,
-									depthFrameArray,
-									colorFramePointNum,
-									colorPointCoordinateInDepthSpace))) {
-
-					//TRANSFORMING COLOR FRAME POINTS ACCORDING TO THE GIVEN COORDINATE
-
-					for (int i = 0; i < colorFramePointNum; i++) {
-						colorPointCoordinateInDepthSpaceIterator = colorPointCoordinateInDepthSpace[i];
-
-						if (colorPointCoordinateInDepthSpaceIterator.X != -numeric_limits<float>::infinity() &&
-							colorPointCoordinateInDepthSpaceIterator.Y != -numeric_limits<float>::infinity()) {
-
-							if ((colorPointCoordinateInDepthSpaceIterator.X >= 0 && colorPointCoordinateInDepthSpaceIterator.X < depthFrameWidth) &&
-								(colorPointCoordinateInDepthSpaceIterator.Y >= 0 && colorPointCoordinateInDepthSpaceIterator.Y < depthFrameHeight)) {
-
-							}
-
-						}
+	if (FAILED(updateBodyFrame)) {
+		cout << "update body frame failed" << endl;
+		return E_FAIL;
+	}
+	if (FAILED(updateBodyIndexFrame)) {
+		cout << "update body index frame failed" << endl;
+		return E_FAIL;
+	}
+	if (FAILED(updateDepthFrame)) {
+		cout << "update depth frame failed" << endl;
+		return E_FAIL;
+	}
+	if (FAILED(updateColorFrame)) {
+		cout << "update color frame failed" << endl;
+		return E_FAIL;
+	}
 
 
-					}
+	//Acquire color frame
+	if (FAILED(mColorFrame->CopyConvertedFrameDataToArray(
+		colorFrameArraySize,
+		colorFrameArray,
+		ColorImageFormat::ColorImageFormat_Bgra))) {
+
+		cout << "copy color frame buffer failed" << endl;
+		return E_FAIL;
+	}
+	//How about updating a exisiting mat, rather than newing one?
+	colorFrameMat = Mat(colorFrameHeight, colorFrameWidth, CV_8UC4, colorFrameArray);
 
 
-				}
+	//Put depth frame data to buffer
+	if (FAILED(mDepthFrame->AccessUnderlyingBuffer(&depthFrameArraySize, &depthFrameArray))) {
+		cout << "accessing depth frame buffer failed" << endl;
+		return E_FAIL;
+	}
 
+	//Mapping color pixels to depth space
+	if (FAILED(multisourceCoordinateMapper->MapColorFrameToDepthSpace(
+				depthFrameArraySize,
+				depthFrameArray,
+				colorFramePointNum,
+				colorPointCoordinateInDepthSpace))) {
+		cout << "mapping pixels failed" << endl;
+		return E_FAIL;
+	}
 
+	for (int i = 0; i < colorFramePointNum; i++) {
+		colorPointCoordinateInDepthSpaceIterator = colorPointCoordinateInDepthSpace[i];
 
+		if (colorPointCoordinateInDepthSpaceIterator.X != -numeric_limits<float>::infinity() &&
+			colorPointCoordinateInDepthSpaceIterator.Y != -numeric_limits<float>::infinity()) {
 
+			if ((colorPointCoordinateInDepthSpaceIterator.X >= 0 && colorPointCoordinateInDepthSpaceIterator.X < depthFrameWidth) &&
+				(colorPointCoordinateInDepthSpaceIterator.Y >= 0 && colorPointCoordinateInDepthSpaceIterator.Y < depthFrameHeight)) {
 
-
-				if (SUCCEEDED(mColorFrame->CopyConvertedFrameDataToArray(
-					colorFrameArraySize,
-					colorFrameArray,
-					ColorImageFormat::ColorImageFormat_Bgra))) {
-
-				}
 			}
- 
+
+		}
+
+
+	}
+
+
+
+
+
+	return S_OK;
+		
+		//Processing depth frame data
+
+
+
+
+
+
+
+
+	
+
 
 			if (SUCCEEDED(mColorFrame->CopyConvertedFrameDataToArray(
 							colorFrameArraySize,
@@ -278,21 +318,8 @@ HRESULT update()
 
 
 
-		mDepthFrame->AccessUnderlyingBuffer(&depthFrameArraySize, &depthFrameArray);
-		multisourceCoordinateMapper->MapColorFrameToDepthSpace(
-			depthFrameArraySize,
-			depthFrameArray,
-			colorFrameArraySize,
-			colorPointCoordinateInDepthSpace);
 
 
-
-
-
-
-
-			return S_OK;
-	}
 
 	return E_FAIL;
 }
