@@ -35,9 +35,9 @@
 #include "BodyIndexFramePainter.h"
 #include "BodyFramePainter.h"
 
-#include "Skeleton.h"
-#include "SkeletalJoint.h"
-#include "Body.h"
+//#include "Skeleton.h"
+//#include "SkeletalJoint.h"
+//#include "Body.h"
 
 
 #define KINECT_STATE_READY 1
